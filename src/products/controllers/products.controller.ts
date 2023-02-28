@@ -19,6 +19,7 @@ import { ParseIntPipe } from '../../common/parse-int.pipe';
 import { CreateProductDto, UpdateProductDto } from '../dtos/products.dtos';
 import { ProductsService } from './../services/products.service';
 import { MongoIdPipe } from '../../common/mongoId.pipe';
+import { FilterProductsDto } from '../dtos/products.dtos';
 
 @ApiTags('products')
 @Controller('products')
@@ -27,12 +28,8 @@ export class ProductsController {
 
   @Get()
   @ApiOperation({ summary: 'List of products' })
-  async getProducts(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-    @Query('brand') brand: string,
-  ) {
-    return await this.productsService.findAll();
+  async getProducts(@Query() params: FilterProductsDto) {
+    return await this.productsService.findAll(params);
   }
 
   @Get(':productId')
