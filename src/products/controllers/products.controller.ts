@@ -37,28 +37,21 @@ export class ProductsController {
   @Get(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
   async getOne(@Param('productId') productId: string) {
-    // response.status(200).send({
-    //   message: `product ${productId}`,
-    // });
     return await this.productsService.findOne(productId);
   }
 
-  // @Post()
-  // create(@Body() payload: CreateProductDto) {
-  //   // return {
-  //   //   message: 'accion de crear',
-  //   //   payload,
-  //   // };
-  //   return this.productsService.create(payload);
-  // }
+  @Post()
+  async create(@Body() payload: CreateProductDto) {
+    return await this.productsService.create(payload);
+  }
 
-  // @Put(':id')
-  // update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
-  //   return this.productsService.update(+id, payload);
-  // }
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
+    return await this.productsService.update(id, payload);
+  }
 
-  // @Delete(':id')
-  // delete(@Param('id') id: string) {
-  //   return this.productsService.remove(+id);
-  // }
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return await this.productsService.remove(id);
+  }
 }
